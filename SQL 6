@@ -1,0 +1,29 @@
+1 .DELETE customers, orders
+FROM customers
+LEFT JOIN orders ON customers.id = orders.customer_id
+WHERE customers.country IN ('China', 'Brazil');
+2.SELECT c.category_name
+FROM categories c
+JOIN products p ON c.category_id = p.category_id
+GROUP BY c.category_name
+ORDER BY AVG(p.price) DESC
+LIMIT 1;
+3.SELECT p.product_name
+FROM products p
+LEFT JOIN sales s ON p.product_id = s.product_id
+GROUP BY p.product_name
+ORDER BY COUNT(s.product_id) ASC
+LIMIT 3;
+4.SELECT c.carrier_name
+FROM carriers c
+LEFT JOIN orders o ON c.carrier_id = o.carrier_id
+GROUP BY c.carrier_name
+ORDER BY COUNT(o.order_id) ASC
+LIMIT 1;
+5.SELECT
+  product_id,
+  product_name,
+  price,
+  price * 0.845 AS discounted_price
+FROM
+  products;
