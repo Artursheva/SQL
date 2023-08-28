@@ -1,0 +1,28 @@
+1.SELECT COUNT(supplier_id) AS supplier_count
+FROM suppliers
+WHERE country NOT IN ('UK', 'China');
+2.SELECT
+  c.category_id,
+  AVG(p.price) AS average_price,
+  MAX(p.price) AS max_price,
+  MIN(p.price) AS min_price,
+  COUNT(p.product_id) AS product_count
+FROM
+  products p
+JOIN
+  categories c ON p.category_id = c.category_id
+WHERE
+  c.category_id IN (3, 5)
+GROUP BY
+  c.category_id;
+3.SELECT SUM(p.price * s.quantity_sold) AS total_revenue
+FROM sales s
+JOIN products p ON s.product_id = p.product_id;
+4.SELECT COUNT(DISTINCT s.country) AS number_of_countries
+FROM suppliers s
+JOIN products p ON s.supplier_id = p.supplier_id
+WHERE p.category_id = 'напитки';
+5.SELECT SUM(c.order_amount) AS total_amount
+FROM customers c
+JOIN orders o ON c.customer_id = o.customer_id
+WHERE c.country = 'USA';
